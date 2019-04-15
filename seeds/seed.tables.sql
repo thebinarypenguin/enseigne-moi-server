@@ -1,20 +1,20 @@
 BEGIN;
 
-  TRUNCATE
-  "word",
-  "language",
-  "user";
+  -- TRUNCATE
+  -- "word",
+  -- "language",
+  -- "user";
 
   INSERT INTO "user"
     ("id", "username", "name", "password")
   VALUES
     (
       1,
-      'admin',
-      'Dunder Mifflin Admin',
-      -- password = "pass"
+      'dunder',
+      'dunder',
       '$2a$10$fCWkaGbt7ZErxaxclioLteLUgg4Q3Rp09WW0s/wSLxDKYsaGYUpjG'
   );
+  --password=pass
 
   INSERT INTO "language"
     ("id", "name", "user_id")
