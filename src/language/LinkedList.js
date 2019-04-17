@@ -11,13 +11,13 @@ class LinkedList {
   }
 
   // Find Node with value val and move it down (away from head) one position
-  moveDown(id) {
+  moveDown(node) {
 
     let previousNode = null;
     let currentNode = this.head;
 
     while (currentNode !== null) {
-      if (currentNode.val.id === id) {
+      if (currentNode.val.id === node.val.id) {
         let nextNodeCopy = currentNode.next;
 
         // currentNode is the first item
