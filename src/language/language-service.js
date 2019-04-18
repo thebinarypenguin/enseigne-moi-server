@@ -28,8 +28,7 @@ const LanguageService = {
         'correct_count',
         'incorrect_count'
       )
-      .where({ language_id })
-      .orderBy('id', 'desc');
+      .where({ language_id });
   },
   getListWordCount(db, language_id) {
     return db
