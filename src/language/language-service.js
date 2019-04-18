@@ -44,7 +44,7 @@ const LanguageService = {
       .select('*')
       .from('word')
       .where('language_id', languageId)
-      .orderBy('id', 'desc')
+      .orderBy('next', 'desc')
       .then((rows) => {
 
         rows.forEach((row) => {
@@ -71,7 +71,19 @@ const LanguageService = {
 
     let current = wordList.head;
 
+    let head = null;
+
+    if (wordList.head.val) {
+      head = wordList.head.val.id;
+    }
+
     while (current !== null) {
+
+      let nextWordId = null;
+
+      if (current.next) {
+        nextWordId = current.next.val.id;
+      }
 
       await db('word')
         .update({
@@ -81,14 +93,17 @@ const LanguageService = {
           correct_count   : current.val.correct_count,
           incorrect_count : current.val.incorrect_count,
           language_id     : current.val.language_id,
-          next            : current.val.next,
+          next            : nextWordId,
         })
         .where('id', current.val.id)
         .andWhere('language_id', languageId)
         .then(() => {
 
           return db('language')
-            .update('total_score', wordList.totalScore)
+            .update({
+              'total_score': wordList.totalScore,
+              'head': head,
+            })
             .where('id', languageId)
             .then(() => {});
         });

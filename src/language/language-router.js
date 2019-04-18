@@ -76,7 +76,14 @@ languageRouter.post("/guess", express.json(), async (req, res, next) => {
 
   let isCorrect;
 
-  if (guess.toLowerCase() === currentWordNode.val.translation) {
+// console.log(guess, currentWordNode.val.translation)
+
+  if (guess === 'translation 2') {
+  console.log(JSON.stringify(list, null, 2));
+  }
+
+
+  if (guess.toLowerCase() === currentWordNode.val.translation.toLowerCase()) {
 
     isCorrect = true;
 
@@ -107,17 +114,22 @@ languageRouter.post("/guess", express.json(), async (req, res, next) => {
     list.moveDown(currentWordNode);
   }
 
-console.log(JSON.stringify(list, null, 2));
+// console.log(JSON.stringify(list, null, 2));
 
   // persist to DB
   await LanguageService.persistList(db, langId, list);
 
   res.json({
+
+    // next word info
     nextWord           : list.head.val.original,
-    totalScore         : list.totalScore,
     wordCorrectCount   : list.head.val.correct_count,
     wordIncorrectCount : list.head.val.incorrect_count,
 
+    // global
+    totalScore         : list.totalScore,
+
+    // current word info
     answer             : currentWordNode.val.translation,
     isCorrect          : isCorrect,
   });
