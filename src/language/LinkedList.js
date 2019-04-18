@@ -45,14 +45,14 @@ class LinkedList {
         }
 
         // currentNode is somewhere in the middle
-        currentNode.next = currentNode.next.next;
+        currentNode.next     = currentNode.next.next;
         currentNode.val.next = currentNode.next.val.id;  // DB next
 
-        nextNodeCopy.next = currentNode;
+        nextNodeCopy.next     = currentNode;
         nextNodeCopy.val.next = nextNodeCopy.next.val.id; // DB next
 
-        previousNode.next = nextNodeCopy;
-        previousNode.val.next =  previousNode.next.val.id; // DB next
+        previousNode.next     = nextNodeCopy;
+        previousNode.val.next = previousNode.next.val.id; // DB next
 
         return;
       }
@@ -69,6 +69,25 @@ class LinkedList {
     } else {
       this.head = new Node(item, this.head);
     }
+  }
+
+  insertLast(item) {
+
+    if (!this.head) {
+      return this.insertFirst(item);
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode.next !== null) {
+      currentNode = currentNode.next;
+    }
+
+    const newNode = new Node(item, null);
+
+    currentNode.next = newNode;
+    currentNode.val.next = newNode.val.id;
+
   }
 }
 
@@ -138,7 +157,7 @@ module.exports = LinkedList;
 
 // console.log(JSON.stringify(test, null, 2))
 
-// let n = findNode(test, 1);
+// let n = findNode(test, 2);
 // test.moveDown(n)
 // test.moveDown(n)
 

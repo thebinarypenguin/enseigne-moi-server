@@ -41,41 +41,72 @@ const LanguageService = {
     const wordList = new LinkedList();
 
     return db
-      .select('*')
-      .from('word')
-      .where('language_id', languageId)
-      .orderBy('next', 'desc')
+      .select('total_score', 'head')
+      .from('language')
+      .where('id', languageId)
       .then((rows) => {
 
-        rows.forEach((row) => {
-          wordList.insertFirst(row);
-        });
+        wordList.totalScore = rows[0]['total_score'];
 
-        return wordList;
+        return rows[0].head;
       })
-      .then((ll) => {
+      .then((head) => {
 
         return db
-          .select('total_score')
-          .from('language')
-          .where('id', languageId)
+          .select('*')
+          .from('word')
+          .where('language_id', languageId)
           .then((rows) => {
 
-            ll.totalScore = rows[0]['total_score'];
+            // rows.forEach((row) => {
+            //   wordList.insertFirst(row);
+            // });
 
-            return ll;
-          })
+            const insert = function (wordId) {
+              console.log('insert', wordId);
+              if (wordId === null || wordId === undefined) {
+                return;
+              }
+
+              // find word row in resultset
+              const row = rows.find((w) => { return w.id === wordId });
+
+              wordList.insertLast(row)
+
+              insert(row.next);
+            }
+
+            insert(head);
+
+
+            // let row = rows.find((r) => { r.id === head });
+
+            // while (row) {
+
+            //   wordList.insertLast(row);
+
+            //   row = rows.find((r) => { r.id === row.next })
+            // }
+
+
+
+            // find row whose id matches language.head
+            // insert it
+            // goto its next ... until next is null
+
+            return wordList;
+          });
       });
   },
   async persistList(db, languageId, wordList) {
-
-    let current = wordList.head;
 
     let head = null;
 
     if (wordList.head.val) {
       head = wordList.head.val.id;
     }
+
+    let current = wordList.head;
 
     while (current !== null) {
 
@@ -97,8 +128,10 @@ const LanguageService = {
         })
         .where('id', current.val.id)
         .andWhere('language_id', languageId)
-        .then(() => {
+        .returning(['id', 'next'])
+        .then((resp) => {
 
+          console.log('persist', resp);
           return db('language')
             .update({
               'total_score': wordList.totalScore,

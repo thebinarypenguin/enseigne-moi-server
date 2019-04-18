@@ -73,15 +73,8 @@ languageRouter.post("/guess", express.json(), async (req, res, next) => {
   const list = await LanguageService.populateList(db, langId)
 
   const currentWordNode = list.head;
-
+console.log(list)
   let isCorrect;
-
-// console.log(guess, currentWordNode.val.translation)
-
-  if (guess === 'translation 2') {
-  console.log(JSON.stringify(list, null, 2));
-  }
-
 
   if (guess.toLowerCase() === currentWordNode.val.translation.toLowerCase()) {
 
@@ -109,12 +102,24 @@ languageRouter.post("/guess", express.json(), async (req, res, next) => {
     // don't touch total score
   }
 
+
+
+  console.log(guess, 'before', JSON.stringify(list, null, 2));
+
+
   // Shift currentWordNode down by it's memory_value
   for (let i = 0; i < currentWordNode.val.memory_value; i++) {
+
+    console.log(guess, 'move down', currentWordNode.val.id)
+
     list.moveDown(currentWordNode);
   }
 
-// console.log(JSON.stringify(list, null, 2));
+
+  console.log(guess, 'after', JSON.stringify(list, null, 2));
+
+
+
 
   // persist to DB
   await LanguageService.persistList(db, langId, list);
