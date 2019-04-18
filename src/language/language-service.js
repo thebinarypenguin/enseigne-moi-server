@@ -58,12 +58,8 @@ const LanguageService = {
           .where('language_id', languageId)
           .then((rows) => {
 
-            // rows.forEach((row) => {
-            //   wordList.insertFirst(row);
-            // });
-
             const insert = function (wordId) {
-              console.log('insert', wordId);
+
               if (wordId === null || wordId === undefined) {
                 return;
               }
@@ -77,22 +73,6 @@ const LanguageService = {
             }
 
             insert(head);
-
-
-            // let row = rows.find((r) => { r.id === head });
-
-            // while (row) {
-
-            //   wordList.insertLast(row);
-
-            //   row = rows.find((r) => { r.id === row.next })
-            // }
-
-
-
-            // find row whose id matches language.head
-            // insert it
-            // goto its next ... until next is null
 
             return wordList;
           });
@@ -131,7 +111,6 @@ const LanguageService = {
         .returning(['id', 'next'])
         .then((resp) => {
 
-          console.log('persist', resp);
           return db('language')
             .update({
               'total_score': wordList.totalScore,
