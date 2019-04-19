@@ -56,26 +56,16 @@ const UserService = {
         .first();
 
       const languageWords = [
-        ["entraine toi", "practice", 1],
-        ["bonjour", "hello", 2],
-        ["maison", "house", 3],
-        ["développeur", "developer", 4],
-        ["traduire", "translate", 5],
-        ["incroyable", "amazing", 6],
-        ["chien", "dog", 7],
-        ["chat", "cat", 8],
-        ["bureau", "desk", 9],
-        ["chaise", "chair", 10],
-        ["livre", "book", 11],
-        ["porte", "door", 12],
-        ["lit", "bed", 13],
-        ["dans", "in", 14],
-        ["sur", "on", 15],
-        ["sans", "without", 16],
-        ["visage", "face", 17],
-        ["yeux", "eyes", 18],
-        ["heure", "hour", 19],
-        ["seconde", "second", null]
+        ['bureau', 'desk', 2],
+        ['chaise', 'chair', 3],
+        ['livre', 'book', 4],
+        ['porte', 'door', 5],
+        ['lit', 'bed', 6],
+        ['dans', 'in', 7],
+        ['sur', 'on', 8],
+        ['sans', 'without', 9],
+        ['visage', 'face', 10],
+        ['yeux', 'eyes', null],
       ];
 
       const [languageHeadId] = await trx.into("word").insert(

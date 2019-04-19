@@ -24,28 +24,16 @@ BEGIN;
   INSERT INTO "word"
     ("id", "language_id", "original", "translation", "next")
   VALUES
-    (1, 1, 'entraine toi', 'practice', 2),
-    (2, 1, 'bonjour', 'hello', 3),
-    (3, 1, 'maison', 'house', 4),
-    (4, 1, 'développeur', 'developer', 5),
-    (5, 1, 'traduire', 'translate', 6),
-    (6, 1, 'incroyable', 'amazing', 7),
-    (7, 1, 'chien', 'dog', 8),
-    (8, 1, 'chat', 'cat', 9),
-    (9, 1, 'bureau', 'desk', 10),
-    (10, 1, 'chaise', 'chair', 11),
-    (11, 1, 'livre', 'book', 12),
-    (12, 1, 'porte', 'door', 13),
-    (13, 1, 'lit', 'bed', 14),
-    (14, 1, 'dans', 'in', 15),
-    (15, 1, 'sur', 'on', 16),
-    (16, 1, 'sans', 'without', 17),
-    (17, 1, 'visage', 'face', 18),
-    (18, 1, 'yeux', 'eyes', 19),
-    (19, 1, 'demain', 'tomorrow', 20),
-    (20, 1, 'hier', 'yesterday', 21),
-    (21, 1, 'heure', 'hour', 22),
-    (22, 1, 'seconde', 'second', null);
+    (1, 1, 'bureau', 'desk', 2),
+    (2, 1, 'chaise', 'chair', 3),
+    (3, 1, 'livre', 'book', 4),
+    (4, 1, 'porte', 'door', 5),
+    (5, 1, 'lit', 'bed', 6),
+    (6, 1, 'dans', 'in', 7),
+    (7, 1, 'sur', 'on', 8),
+    (8, 1, 'sans', 'without', 9),
+    (9, 1, 'visage', 'face', 10),
+    (10, 1, 'yeux', 'eyes', null);
 
   UPDATE "language" SET head = 1 WHERE id = 1;
 
