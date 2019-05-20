@@ -5,7 +5,7 @@
 If using user `enseigne_moi`:
 
 ```bash
-mv example.env .env
+cp example.env .env
 createdb -U enseigne_moi enseigne_moi
 createdb -U enseigne_moi enseigne_moi_test
 ```
