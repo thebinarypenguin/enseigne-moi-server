@@ -1,21 +1,21 @@
-# Spaced repetition API!
+# Enseigne Moi API
 
 ## Local dev setup
 
-If using user `dunder-mifflin`:
+If using user `enseigne_moi`:
 
 ```bash
 mv example.env .env
-createdb -U dunder-mifflin spaced-repetition
-createdb -U dunder-mifflin spaced-repetition-test
+createdb -U enseigne_moi enseigne_moi
+createdb -U enseigne_moi enseigne_moi_test
 ```
 
-If your `dunder-mifflin` user has a password be sure to set it in `.env` for all appropriate fields. Or if using a different user, update appropriately.
+If your `enseigne_moi` user has a password be sure to set it in `.env` for all appropriate fields. Or if using a different user, update appropriately.
 
 ```bash
 npm install
 npm run migrate
-env MIGRATION_DB_NAME=spaced-repetition-test npm run migrate
+env MIGRATION_DB_NAME=enseigne_moi_test npm run migrate
 ```
 
 And `npm test` should work at this point
