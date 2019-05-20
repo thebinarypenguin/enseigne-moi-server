@@ -10,8 +10,8 @@ BEGIN;
   VALUES
     (
       1,
-      'dunder',
-      'dunder',
+      'admin',
+      'admin',
       '$2a$10$fCWkaGbt7ZErxaxclioLteLUgg4Q3Rp09WW0s/wSLxDKYsaGYUpjG'
   );
   --password=pass
